@@ -1,21 +1,23 @@
 import unittest
 
+
 def count_inversion_pairs(arr):
     # Placeholder for the actual implementation
     if arr:
-        return _count(arr, 0, len(arr)-1)
+        return _count(arr, 0, len(arr) - 1)
     else:
         return 0
+
 
 def _count(arr, left, right):
     if left == right:
         return 0
-    
-    mid = left + ((right - left)>>1)
+
+    mid = left + ((right - left) >> 1)
     left_count = _count(arr, left, mid)
-    right_count = _count(arr, mid+1, right)
+    right_count = _count(arr, mid + 1, right)
     count = 0
-    left_idx, right_idx = left, mid+1
+    left_idx, right_idx = left, mid + 1
     arr_copy = []
     while left_idx <= mid and right_idx <= right:
         if arr[left_idx] <= arr[right_idx]:
@@ -25,7 +27,7 @@ def _count(arr, left, right):
             arr_copy.append(arr[left_idx])
             left_idx += 1
             count += right - right_idx + 1
-    
+
     while left_idx <= mid:
         arr_copy.append(arr[left_idx])
         left_idx += 1
@@ -34,15 +36,11 @@ def _count(arr, left, right):
         arr_copy.append(arr[right_idx])
         right_idx += 1
 
-    for i, j in zip(range(len(arr_copy)), range(left, right+1)):
+    for i, j in zip(range(len(arr_copy)), range(left, right + 1)):
         arr[j] = arr_copy[i]
-    
+
     return count + left_count + right_count
 
-    
-
-    
-    
 
 class TestInversionPairs(unittest.TestCase):
     def test_sorted_ascending(self):
@@ -100,5 +98,6 @@ class TestInversionPairs(unittest.TestCase):
         self.assertEqual(count_inversion_pairs(arr), 499500)
         # Explanation: Sum of 1 to 999 = 999*1000/2 = 499500
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
