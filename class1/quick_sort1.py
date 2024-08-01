@@ -4,6 +4,18 @@ def quicksort(arr):
         return _quicksort(arr,len(arr)-1)
     else:
         return arr
+    
+def _quicksort(arr, target_idx, left, right):
+    if left == right:
+        return
+    target_num = arr[target_idx]
+    p0, p1 = 0, 0
+    while p1 <= len(arr) - 1:
+        if arr[p1] < target_num:
+            arr[p1], arr[p0] = arr[p0], arr[p1]
+            p0+=1
+        
+
 
 # Test cases
 def test_quicksort():
