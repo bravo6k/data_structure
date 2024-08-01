@@ -7,17 +7,19 @@ def quicksort(arr):
 def _quicksort(arr, left, right):
     if left >= right:
         return
-    
-    target_num = arr[right]
-    p0, p1 = left, left
-    while p1 <= right:
-        if arr[p1] < target_num:
+    p0, p1, p2 = left, left, right
+    target = arr[right]
+    while p1 <=right or p1 <= p2:
+        if arr[p1] < target:
             arr[p1], arr[p0] = arr[p0], arr[p1]
-            p0+=1
-        p1 += 1
-    arr[p0], arr[right] = arr[right], arr[p0]
-    _quicksort(arr, left, max(p0-1,0))
-    _quicksort(arr, p0+1, right)
+            p0 += 1
+            p1 += 1
+        elif arr[p1] > target:
+            arr[p1], arr[p2] = arr[p2], arr[p1]
+            p2 -= 1
+    arr[right], arr[p2+1] = arr[p0], arr[p2+1]
+
+
     
 
 
