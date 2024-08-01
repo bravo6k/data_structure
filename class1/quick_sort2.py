@@ -9,7 +9,7 @@ def _quicksort(arr, left, right):
         return
     p0, p1, p2 = left, left, right
     target = arr[right]
-    while p1 <=right or p1 <= p2:
+    while p1 <=right and p1 <= p2:
         if arr[p1] < target:
             arr[p1], arr[p0] = arr[p0], arr[p1]
             p0 += 1
@@ -17,7 +17,10 @@ def _quicksort(arr, left, right):
         elif arr[p1] > target:
             arr[p1], arr[p2] = arr[p2], arr[p1]
             p2 -= 1
-    arr[right], arr[p2+1] = arr[p0], arr[p2+1]
+        else:
+            p1+=1
+    _quicksort(arr, left, max(0,p0-1))
+    _quicksort(arr, p2+1, right)
 
 
     
@@ -60,7 +63,14 @@ def test_quicksort():
     large_array = [random.randint(1, 1000) for _ in range(10000)]
     assert quicksort(large_array) == sorted(large_array)
 
-    print("All test cases passed!")
+    # 11. Edge case: Array with all elements the same
+    assert quicksort([1, 2]) == [1, 2]
+    # 12. Edge case: Array with all elements the same
+    assert quicksort([2, 1]) == [1, 2]
+    # 13. Edge case: Array with all elements the same
+    assert quicksort([2, 1, 3]) == [1, 2, 3]
+
+    print("All 13 test cases passed!")
 
 # Run the tests
 test_quicksort()
