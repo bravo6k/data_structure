@@ -1,20 +1,20 @@
 import unittest
 
 def dutch_national_flag(arr, pivot):
-    p1, p2, p3 = 0, 0, 0
-    while p3 < len(arr):
-        if arr[p3] < pivot:
-            arr[p3], arr[p1] = arr[p1], arr[p3]
+    p1, p2, p3 = 0, 0, len(arr) - 1
+    while p2 < len(arr) and p3>=p2:
+        if arr[p2] < pivot:
+            arr[p2], arr[p1] = arr[p1], arr[p2]
             p1 += 1
-            arr[p2], arr[p3] = arr[p3], arr[p2]
             p2 += 1
-        elif arr[p3] == pivot:
+        elif arr[p2] > pivot:
             arr[p2], arr[p3] = arr[p3], arr[p2]
+            p3 -= 1
+        else:
             p2 += 1
-        p3 += 1
     return arr
 
-print(dutch_national_flag([2, 5, 5, 1, 5, 2, 2, 4], 3))
+print(dutch_national_flag([2, 5, 5, 3, 5, 2, 3, 4,3], 3))
 
 
 class TestDutchNationalFlag(unittest.TestCase):
